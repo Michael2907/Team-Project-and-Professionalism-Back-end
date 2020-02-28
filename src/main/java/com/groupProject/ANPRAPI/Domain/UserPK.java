@@ -4,7 +4,5 @@ import java.io.Serializable;
 
 public class UserPK implements Serializable {
 
-    private String username;
-
-    private String password;
+    private Integer userId;
 }
