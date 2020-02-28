@@ -54,14 +54,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().frameOptions().sameOrigin().and().
         csrf().disable()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/api/authenticate").permitAll().antMatchers("/api/initialiseUser").permitAll().
-                antMatchers("/h2-console/**").permitAll().antMatchers("/swagger-ui.html").permitAll().antMatchers("/webjars/**").permitAll().
-                antMatchers("/swagger-resources/**").permitAll().antMatchers("/v2/api-docs").permitAll().
+                .authorizeRequests().
+                antMatchers("/**").permitAll().
+                antMatchers("/api/authenticate").permitAll().
+                antMatchers("/api/initialiseUser").permitAll().
+                antMatchers("/swagger-ui.html").permitAll().
+                antMatchers("/webjars/**").permitAll().
+                antMatchers("/swagger-resources/**").permitAll().
+                antMatchers("/v2/api-docs").permitAll().
                 // all other requests need to be authenticated
-                        anyRequest().authenticated().and().
+                anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to
                 // store user's state.
-                        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+                exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // Add a filter to validate the tokens with every request

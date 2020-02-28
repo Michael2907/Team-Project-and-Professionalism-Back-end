@@ -14,9 +14,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void initialiseUser(String username, String password) {
-        User user = new User();
-        user.setPassword(password);
-        user.setUsername(username);
-        this.userRepository.save(user);
+        this.userRepository.save(username, password, "NL62AMK", 1, "Test@Test.com");
     }
 }

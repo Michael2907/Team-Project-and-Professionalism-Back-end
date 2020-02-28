@@ -51,6 +51,7 @@ public class JwtAuthenticationController {
             userService.initialiseUser(authenticationRequest.getUsername(), passwordEncoder.encode(authenticationRequest.getPassword()));
             return new ResponseEntity(HttpStatus.OK);
         }catch (Exception ex){
+            System.out.println(ex);
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
