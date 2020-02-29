@@ -1,7 +1,7 @@
 package com.groupProject.ANPRAPI.Controller;
 
-import com.groupProject.ANPRAPI.Domain.User;
-import com.groupProject.ANPRAPI.Service.UserService;
+import com.groupProject.ANPRAPI.Domain.Activity;
+import com.groupProject.ANPRAPI.Service.ActivityService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(tags="User Controller")
+@Api(tags="Activity Controller")
 @CrossOrigin
 @RestController
-@RequestMapping("/api/user")
-public class UserController {
+@RequestMapping("/api/activity")
+public class ActivityController {
 
     @Autowired
-    private UserService userService;
+    private ActivityService activityService;
 
     @GetMapping("")
-    private List<User> getUsers(){
-        return userService.findAll();
+    private List<Activity> getActivity(){
+        return activityService.findAll();
     }
 }
