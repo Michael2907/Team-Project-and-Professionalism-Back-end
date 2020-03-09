@@ -7,4 +7,6 @@ import java.util.List;
 public interface ActivityService {
 
     List<Activity> findAll();
+
+    void logActivity(String numberPlate);
 }

@@ -4,10 +4,7 @@ import com.groupProject.ANPRAPI.Domain.Activity;
 import com.groupProject.ANPRAPI.Service.ActivityService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,10 @@ public class ActivityController {
     @GetMapping("")
     private List<Activity> getActivity(){
         return activityService.findAll();
+    }
+
+    @PostMapping("")
+    private void postActivity(@RequestParam String numberPlate){
+        activityService.logActivity(numberPlate);
     }
 }

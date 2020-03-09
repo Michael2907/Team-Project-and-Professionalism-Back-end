@@ -13,8 +13,11 @@ public interface UserRepository extends JpaRepository<User, UserPK>, JpaSpecific
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO USER_TABLE VALUES (:userName, :password, :numberPlate, :userGroup, :email)", nativeQuery = true)
+    @Query(value = "INSERT INTO USER_TABLE VALUES ((SELECT MAX(userid) + 1 from USER_TABLE),:userName, :password, :numberPlate, :userGroup, :email)", nativeQuery = true)
     void save(@Param("userName") String userName, @Param("password") String password,
               @Param("numberPlate") String numberPlate, @Param("userGroup") Integer userGroup,
               @Param("email") String email);
+
+    @Query(value = "SELECT * FROM USER_TABLE WHERE numberPlate = :numberPlate", nativeQuery = true)
+    User find(@Param("numberPlate") String numberPlate);
 }

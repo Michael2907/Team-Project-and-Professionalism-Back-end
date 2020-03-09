@@ -13,4 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface ActivityRepository extends JpaRepository<Activity, ActivityPK>, JpaSpecificationExecutor<Activity> {
 
+    @Query(value = "SELECT * FROM ACTIVITY_TABLE WHERE USERID = :userId and DATETIMEEXITED is null", nativeQuery = true)
+    Activity findLatestActivity(@Param("userId") Integer userId);
 }
