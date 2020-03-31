@@ -3,6 +3,7 @@ package com.groupProject.ANPRAPI.Domain;
 import org.hibernate.validator.internal.IgnoreForbiddenApisErrors;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_Table")
@@ -28,15 +29,19 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    public User(){}
+    @Column(name = "initialised")
+    private Boolean initialised;
 
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
-        this.email = "test@test.com";
-        this.numberPlate = "sgsfsf";
-        this.userGroup = 1;
-    }
+    @Column(name = "deleted")
+    private Boolean deleted;
+
+    @Column(name = "startDateTime")
+    private Date startDateTime;
+
+    @Column(name = "endDateTime")
+    private Date endDateTime;
+
+    public User(){}
 
     public String getUsername() {
         return username;
@@ -84,5 +89,37 @@ public class User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Boolean getInitialised() {
+        return initialised;
+    }
+
+    public void setInitialised(Boolean initialised) {
+        this.initialised = initialised;
+    }
+
+    public Boolean getDeleted(){
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public Date getStartDateTime(){
+        return startDateTime;
+    }
+
+    public void setStartDateTime(Date startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public Date getEndDateTime(){
+        return endDateTime;
+    }
+
+    public void setEndDateTime(Date endDateTime) {
+        this.endDateTime = endDateTime;
     }
 }

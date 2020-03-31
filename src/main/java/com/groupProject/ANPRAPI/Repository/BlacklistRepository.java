@@ -13,4 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface BlacklistRepository extends JpaRepository<Blacklist, BlacklistPK>, JpaSpecificationExecutor<Blacklist> {
 
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM BLACKLIST_TABLE WHERE numberPlate = :numberPlate", nativeQuery = true)
+    void delete(@Param("numberPlate") String numberPlate);
 }

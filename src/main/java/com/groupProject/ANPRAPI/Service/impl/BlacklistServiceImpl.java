@@ -20,4 +20,14 @@ public class BlacklistServiceImpl implements BlacklistService {
     public List<Blacklist> findAll() {
         return this.blacklistRepository.findAll();
     }
+
+    @Override
+    public void delete(String numberPlate) {
+        this.blacklistRepository.delete(numberPlate);
+    }
+
+    @Override
+    public void save(Blacklist blacklist) {
+        this.blacklistRepository.save(blacklist);
+    }
 }

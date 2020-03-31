@@ -4,11 +4,10 @@ import com.groupProject.ANPRAPI.Domain.Blacklist;
 import com.groupProject.ANPRAPI.Service.BlacklistService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @Api(tags="Blacklist Controller")
@@ -23,5 +22,20 @@ public class BlacklistController {
     @GetMapping("")
     private List<Blacklist> getBlacklist(){
         return blacklistService.findAll();
+    }
+
+    @DeleteMapping("")
+    private String deleteFromBlacklist(@RequestParam String numberPlate) throws Exception {
+        try{
+            blacklistService.delete(numberPlate);
+        }catch(Exception ex){
+            throw new Exception("Number plate not found");
+        }
+        return "Success";
+    }
+
+    @PutMapping("")
+    private void insertIntoBlacklist(@RequestBody Blacklist blacklist){
+        blacklistService.save(blacklist);
     }
 }

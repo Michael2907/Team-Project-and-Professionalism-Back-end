@@ -7,4 +7,8 @@ import java.util.List;
 public interface BlacklistService {
 
     List<Blacklist> findAll();
+
+    void delete(String numberPlate);
+
+    void save(Blacklist blacklist);
 }

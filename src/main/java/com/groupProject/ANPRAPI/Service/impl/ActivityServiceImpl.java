@@ -44,4 +44,14 @@ public class ActivityServiceImpl implements ActivityService {
             }
         }
     }
+
+    @Override
+    public List<Activity> findAllForDates(java.sql.Date startDate, java.sql.Date endDate) {
+        return this.activityRepository.findAllForDates(startDate, endDate);
+    }
+
+    @Override
+    public List<Activity> findAllCurrentlyParked() {
+        return this.activityRepository.findAllCurrentlyParked();
+    }
 }
