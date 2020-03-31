@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" th:action="@{/pay}">
+<form method="post" th:action="@{/pay}" th:object="${userID}">
+	<p>Id: <input type="text" th:field="*{id}" /></p>
 	<button type="submit"> Process Payment </button>
 </form>
 </body>

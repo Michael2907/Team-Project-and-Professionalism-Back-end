@@ -41,6 +41,9 @@ public class User {
     @Column(name = "endDateTime")
     private Date endDateTime;
 
+    @Column(name = "credits")
+    private Integer credits;
+
     public User(){}
 
     public String getUsername() {
@@ -121,5 +124,13 @@ public class User {
 
     public void setEndDateTime(Date endDateTime) {
         this.endDateTime = endDateTime;
+    }
+
+    public void setCredits(Integer credits) {
+        this.credits = credits;
+    }
+
+    public Integer getCredits(){
+        return credits;
     }
 }

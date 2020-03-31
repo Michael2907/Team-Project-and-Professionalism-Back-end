@@ -1,5 +1,7 @@
 package com.groupProject.ANPRAPI.PayPal;
 
+import com.groupProject.ANPRAPI.Domain.UserID;
+import com.groupProject.ANPRAPI.Service.UserService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +27,9 @@ public class PaymentController {
 	
 	@Autowired
 	private PaypalService paypalService;
+
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(){
@@ -31,13 +37,13 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "pay")
-	public String pay(HttpServletRequest request){
+	public String pay(HttpServletRequest request, @ModelAttribute UserID userID){
 		String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
 		String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
 		try {
 			Payment payment = paypalService.createPayment(
-					4.00, 
-					"USD", 
+					10.00,
+					"GBP",
 					PaypalPaymentMethod.paypal, 
 					PaypalPaymentIntent.sale,
 					"payment description", 
@@ -64,6 +70,8 @@ public class PaymentController {
 		try {
 			Payment payment = paypalService.executePayment(paymentId, payerId);
 			if(payment.getState().equals("approved")){
+				//Successfully made payment
+				//userService.addCredits(10);
 				return "success";
 			}
 		} catch (PayPalRESTException e) {
