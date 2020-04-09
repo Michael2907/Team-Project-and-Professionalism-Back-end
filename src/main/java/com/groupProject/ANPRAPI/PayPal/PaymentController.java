@@ -1,5 +1,7 @@
 package com.groupProject.ANPRAPI.PayPal;
 
+import com.groupProject.ANPRAPI.Config.JwtResponse;
+import com.groupProject.ANPRAPI.Config.JwtTokenUtil;
 import com.groupProject.ANPRAPI.Domain.UserID;
 import com.groupProject.ANPRAPI.Service.UserService;
 import com.paypal.api.payments.Links;
@@ -8,18 +10,23 @@ import com.paypal.base.rest.PayPalRESTException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/")
 public class PaymentController {
-	
+
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+
 	public static final String PAYPAL_SUCCESS_URL = "pay/success";
 	public static final String PAYPAL_CANCEL_URL = "pay/cancel";
 	
@@ -37,7 +44,8 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "pay")
-	public String pay(HttpServletRequest request, @ModelAttribute UserID userID){
+	public String pay(HttpServletRequest request){
+		//String username = jwtTokenUtil.getUsernameFromToken(jwtToken);
 		String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
 		String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
 		try {
@@ -71,7 +79,7 @@ public class PaymentController {
 			Payment payment = paypalService.executePayment(paymentId, payerId);
 			if(payment.getState().equals("approved")){
 				//Successfully made payment
-				//userService.addCredits(10);
+				userService.addCredits(10, payment.getPayer().getPayerInfo().getEmail());
 				return "success";
 			}
 		} catch (PayPalRESTException e) {
@@ -79,5 +87,4 @@ public class PaymentController {
 		}
 		return "redirect:/";
 	}
-	
 }

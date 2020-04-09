@@ -34,4 +34,14 @@ public interface UserRepository extends JpaRepository<User, UserPK>, JpaSpecific
 
     @Query(value = "SELECT * FROM USER_TABLE WHERE userID = :userID", nativeQuery = true)
     User findUserByID(@Param("userID") Integer userID);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE USER_TABLE set credits = credits + :credits where email = :email", nativeQuery = true)
+    void addCredits(@Param("credits") Integer credits, @Param("email") String email);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE USER_TABLE set credits = credits - 1 where userID = :userID", nativeQuery = true)
+    void deductCredits(@Param("userID") Integer userID);
 }

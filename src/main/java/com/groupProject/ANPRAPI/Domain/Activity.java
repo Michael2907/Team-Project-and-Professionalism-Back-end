@@ -1,5 +1,8 @@
 package com.groupProject.ANPRAPI.Domain;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import java.util.Date;
 

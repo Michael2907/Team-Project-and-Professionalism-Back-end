@@ -5,8 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" th:action="@{/pay}" th:object="${userID}">
-	<p>Id: <input type="text" th:field="*{id}" /></p>
+<form method="post" th:action="@{/pay}" >
+	<p>Id: <input type="text" /></p>
 	<button type="submit"> Process Payment </button>
 </form>
 </body>

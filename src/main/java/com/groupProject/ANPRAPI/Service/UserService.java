@@ -20,4 +20,10 @@ public interface UserService {
     Integer getUserGroup(String userName);
 
     User findUserByID(Integer ID);
+
+    void addCredits(Integer credits, String email);
+
+    void deductCredits(Integer userID);
+
+
 }

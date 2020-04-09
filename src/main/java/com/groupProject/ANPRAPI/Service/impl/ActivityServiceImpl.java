@@ -9,6 +9,8 @@ import com.groupProject.ANPRAPI.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +23,9 @@ public class ActivityServiceImpl implements ActivityService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public List<Activity> findAll() {
         return this.activityRepository.findAll();
@@ -31,16 +36,21 @@ public class ActivityServiceImpl implements ActivityService {
         User user = userRepository.find(numberPlate);
         if(user != null){
             Activity foundActivity = this.activityRepository.findLatestActivity(user.getUserId());
+            if(user.getCredits() == 0){
+                return;
+            }else{
+                userService.deductCredits(user.getUserId());
+            }
             if(foundActivity != null){
-                Date date = new Date();
-                foundActivity.setDateTimeExited(date);
-                this.activityRepository.save(foundActivity);
+                Calendar currenttime = Calendar.getInstance();
+                java.sql.Timestamp sqldate = new java.sql.Timestamp((currenttime.getTime()).getTime());
+                this.activityRepository.update(sqldate, foundActivity.getActivityID());
             }else{
                 Activity activity = new Activity();
                 activity.setUserID(user.getUserId());
-                Date date = new Date();
-                activity.setDateTimeEntered(date);
-                this.activityRepository.save(activity);
+                Calendar currenttime = Calendar.getInstance();
+                java.sql.Timestamp sqldate = new java.sql.Timestamp((currenttime.getTime()).getTime());
+                this.activityRepository.save(sqldate, activity.getUserID());
             }
         }
     }

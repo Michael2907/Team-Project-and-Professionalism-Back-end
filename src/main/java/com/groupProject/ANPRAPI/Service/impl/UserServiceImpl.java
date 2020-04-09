@@ -68,4 +68,14 @@ public class UserServiceImpl implements UserService {
     public User findUserByID(Integer ID) {
         return userRepository.findUserByID(ID);
     }
+
+    @Override
+    public void addCredits(Integer credits, String email) {
+        this.userRepository.addCredits(credits, email);
+    }
+
+    @Override
+    public void deductCredits(Integer userID) {
+        this.userRepository.deductCredits(userID);
+    }
 }
