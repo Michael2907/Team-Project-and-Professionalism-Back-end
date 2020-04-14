@@ -34,4 +34,7 @@ public interface UserRepository extends JpaRepository<User, UserPK>, JpaSpecific
 
     @Query(value = "SELECT * FROM USER_TABLE WHERE userID = :userID", nativeQuery = true)
     User findUserByID(@Param("userID") Integer userID);
+
+    @Query(value = "SELECT * FROM USER_TABLE WHERE numberPlate = :numberPlate", nativeQuery = true)
+    User findAllForNumberPlate(@Param("numberPlate") String numberPlate);
 }
