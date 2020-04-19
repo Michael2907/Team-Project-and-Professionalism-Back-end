@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * REST controller to handle all actions on the carpark table
+ */
 @Api(tags="Carpark Controller")
 @CrossOrigin
 @RestController
@@ -20,6 +23,10 @@ public class CarParkController {
     @Autowired
     private CarParkService carParkService;
 
+    /**
+     * GET request to return information on the carparks available
+     * @return List of carpark objects
+     */
     @GetMapping("")
     private List<CarPark> getCarPark(){
         return carParkService.findAll();

@@ -17,6 +17,8 @@ public interface UserService {
 
     Boolean findUserForNumberPlate(String numberPlate);
 
+    User findUserForNumberPlateUser(String numberPlate);
+
     Integer getUserGroup(String userName);
 
     User findUserByID(Integer ID);

@@ -8,6 +8,8 @@ public interface BlacklistService {
 
     List<Blacklist> findAll();
 
+    Boolean findForNumberPlate(String numberPlate);
+
     void delete(String numberPlate);
 
     void save(Blacklist blacklist);

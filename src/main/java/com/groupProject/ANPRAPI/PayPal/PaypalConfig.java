@@ -10,9 +10,13 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class to handle the config of paypal
+ */
 @Configuration
 public class PaypalConfig {
 
+	//define paypal config
 	@Value("${paypal.client.app}")
     private String clientId;
 	@Value("${paypal.client.secret}")

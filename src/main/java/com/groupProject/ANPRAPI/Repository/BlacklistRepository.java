@@ -17,4 +17,7 @@ public interface BlacklistRepository extends JpaRepository<Blacklist, BlacklistP
     @Modifying
     @Query(value = "DELETE FROM BLACKLIST_TABLE WHERE numberPlate = :numberPlate", nativeQuery = true)
     void delete(@Param("numberPlate") String numberPlate);
+
+    @Query(value = "SELECT * FROM BLACKLIST_TABLE WHERE numberPlate = :numberPlate", nativeQuery = true)
+    Blacklist findForNumberPlate(@Param("numberPlate") String numberPlate);
 }

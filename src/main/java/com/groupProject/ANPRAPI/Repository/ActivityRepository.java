@@ -19,7 +19,7 @@ public interface ActivityRepository extends JpaRepository<Activity, ActivityPK>,
     @Query(value = "SELECT * FROM ACTIVITY_TABLE WHERE USERID = :userId and DATETIMEEXITED is null", nativeQuery = true)
     Activity findLatestActivity(@Param("userId") Integer userId);
 
-    @Query(value = "SELECT * FROM ACTIVITY_TABLE WHERE DateTimeEntered > :startDate and DateTimeExited < :endDate", nativeQuery = true)
+    @Query(value = "SELECT * FROM ACTIVITY_TABLE WHERE (DateTimeEntered > :startDate and DateTimeEntered < :endDate) and (DateTimeExited < :endDate or DateTimeExited is NULL)", nativeQuery = true)
     List<Activity> findAllForDates(@Param("startDate") java.sql.Date startDate, @Param("endDate") java.sql.Date endDate);
 
     @Query(value = "SELECT * FROM ACTIVITY_TABLE WHERE DateTimeExited is null", nativeQuery = true)

@@ -60,6 +60,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserForNumberPlateUser(String numberPlate) {
+        return this.userRepository.findAllForNumberPlate(numberPlate);
+    }
+
+    @Override
     public Integer getUserGroup(String userName) {
         return userRepository.findUser(userName).getUserGroup();
     }

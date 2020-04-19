@@ -22,6 +22,16 @@ public class BlacklistServiceImpl implements BlacklistService {
     }
 
     @Override
+    public Boolean findForNumberPlate(String numberPlate) {
+        Blacklist blacklist = this.blacklistRepository.findForNumberPlate(numberPlate);
+        if(null == blacklist){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
     public void delete(String numberPlate) {
         this.blacklistRepository.delete(numberPlate);
     }
