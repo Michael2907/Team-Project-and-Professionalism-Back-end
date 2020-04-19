@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service that is used to handle retrieval of user details
+ */
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 

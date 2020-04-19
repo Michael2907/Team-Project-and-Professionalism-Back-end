@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Class to handle all incoming requests and process the JWT token that should be in the Authorization header
+ */
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 

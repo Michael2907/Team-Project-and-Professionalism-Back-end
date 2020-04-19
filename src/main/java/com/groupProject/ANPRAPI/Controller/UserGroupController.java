@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Generated;
 import java.util.List;
 
+/**
+ * REST controller to handle interactions with the usergroup table
+ */
 @Api(tags="UserGroup Controller")
 @CrossOrigin
 @RestController
@@ -21,6 +24,10 @@ public class UserGroupController {
     @Autowired
     private UserGroupService userGroupService;
 
+    /**
+     * GET request to get all usergroups
+     * @return list of user group objects
+     */
     @GetMapping("")
     private List<UserGroup> getUserGroups(){
         return userGroupService.findAll();

@@ -11,6 +11,9 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service used to create and execute paypal payment
+ */
 @Service
 public class PaypalService {
 

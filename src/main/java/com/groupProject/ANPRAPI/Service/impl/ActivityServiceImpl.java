@@ -30,13 +30,16 @@ public class ActivityServiceImpl implements ActivityService {
     public void logActivity(String numberPlate) {
         User user = userRepository.find(numberPlate);
         if(user != null){
+            //If user is found find their latest activity
             Activity foundActivity = this.activityRepository.findLatestActivity(user.getUserId());
 
             if(foundActivity != null){
+                //If they have an activity with an entry time and no exit time set the exit time
                 Calendar currenttime = Calendar.getInstance();
                 java.sql.Timestamp sqldate = new java.sql.Timestamp((currenttime.getTime()).getTime());
                 this.activityRepository.update(sqldate, foundActivity.getActivityID());
             }else{
+                //If they have no activity set the entry time
                 Activity activity = new Activity();
                 activity.setUserID(user.getUserId());
                 Calendar currenttime = Calendar.getInstance();

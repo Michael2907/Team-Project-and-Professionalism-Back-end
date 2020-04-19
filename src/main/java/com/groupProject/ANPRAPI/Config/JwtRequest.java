@@ -2,6 +2,9 @@ package com.groupProject.ANPRAPI.Config;
 
 import java.io.Serializable;
 
+/**
+ * Object that is used when a user is logging in
+ */
 public class JwtRequest implements Serializable {
 
     private static final long serialVersionUID = 5926468583005150707L;

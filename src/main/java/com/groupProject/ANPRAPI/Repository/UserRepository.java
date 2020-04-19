@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, UserPK>, JpaSpecific
               @Param("numberPlate") String numberPlate, @Param("userGroup") Integer userGroup,
               @Param("email") String email);
 
-    @Query(value = "SELECT * FROM USER_TABLE WHERE numberPlate = :numberPlate", nativeQuery = true)
+    @Query(value = "SELECT * FROM USER_TABLE WHERE numberPlate = :numberPlate and deleted = 0", nativeQuery = true)
     User find(@Param("numberPlate") String numberPlate);
 
     @Query(value = "SELECT * FROM USER_TABLE WHERE userName = :userName", nativeQuery = true)
@@ -35,6 +35,6 @@ public interface UserRepository extends JpaRepository<User, UserPK>, JpaSpecific
     @Query(value = "SELECT * FROM USER_TABLE WHERE userID = :userID", nativeQuery = true)
     User findUserByID(@Param("userID") Integer userID);
 
-    @Query(value = "SELECT * FROM USER_TABLE WHERE numberPlate = :numberPlate", nativeQuery = true)
+    @Query(value = "SELECT * FROM USER_TABLE WHERE numberPlate = :numberPlate and deleted = 0", nativeQuery = true)
     User findAllForNumberPlate(@Param("numberPlate") String numberPlate);
 }

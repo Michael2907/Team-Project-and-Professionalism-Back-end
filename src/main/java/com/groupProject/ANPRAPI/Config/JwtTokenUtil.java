@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Class to handle util functions of the JWT token
+ */
 @Component
 public class JwtTokenUtil implements Serializable {
 

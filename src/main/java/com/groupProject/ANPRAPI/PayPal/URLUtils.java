@@ -2,6 +2,9 @@ package com.groupProject.ANPRAPI.PayPal;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Class to handle to config of URL's passed to paypal for redirect
+ */
 public class URLUtils {
 
 	public static String getBaseURl(HttpServletRequest request) {
